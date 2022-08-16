@@ -10,3 +10,13 @@ pub async fn event_loop(init: fn(&mut Context), frame: fn(&mut Context)) {
         mq::next_frame().await
     }
 }
+
+pub fn scale(unscaled: f32) -> f32 {
+    println!("{}x{}", mq::screen_width(), mq::screen_height());
+    0f32
+}
+
+fn unscale(scaled: f32) -> f32 {
+    panic!("graphics::unscale(scaled: f32) -> f32 not yet implemented!");
+    0f32
+}

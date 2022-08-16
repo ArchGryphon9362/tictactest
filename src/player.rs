@@ -19,4 +19,8 @@ impl Player {
     pub fn get_rounds_won(&self) -> i32 {
         self.rounds_won
     }
+
+    pub fn get_name(&self) -> String {
+        self.name.clone()
+    }
 }
