@@ -1,18 +1,19 @@
 use macroquad::prelude as mq;
+mod context;
+mod player;
 mod graphics;
 
-fn init() {
-    
+fn init(ctx: &mut context::Context) {
+    ctx.set_player(0, String::from("John"));
+    ctx.set_player(1, String::from("Lennon"));
 }
 
-fn frame(frame_count: &mut i32) {
+fn frame(ctx: &mut context::Context) {
     mq::clear_background(mq::BLACK);
-    mq::draw_text(&format!("Hey, {}", frame_count)[..], 30f32, 30f32, 48f32, mq::WHITE);
-    *frame_count += 1;
+    mq::draw_text(&format!("Hey, {}", ctx.get_frame())[..], 30f32, 30f32, 48f32, mq::WHITE);
 }
 
 #[macroquad::main("TicTacTest")]
 async fn main() {
-    let mut frame_count = 0;
-    graphics::event_loop(init, frame, &mut frame_count).await
+    graphics::event_loop(init, frame).await
 }

@@ -1,9 +1,12 @@
 use macroquad::prelude as mq;
+use crate::context::Context;
 
-pub async fn event_loop(init: fn(), frame: fn(&mut i32), frame_count: &mut i32) {
-    init();
+pub async fn event_loop(init: fn(&mut Context), frame: fn(&mut Context)) {
+    let mut context = Context::new();
+    init(&mut context);
     loop {
-        frame(frame_count);
+        frame(&mut context);
+        context.frame();
         mq::next_frame().await
     }
 }
