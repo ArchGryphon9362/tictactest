@@ -20,6 +20,7 @@ impl Context {
         self.frame_count += 1;
     }
 
+    #[allow(dead_code)]
     pub fn get_frame(&self) -> i32 {
         self.frame_count
     }
@@ -30,6 +31,13 @@ impl Context {
     }
 
     pub fn get_player(&self, player: usize) -> &Option<Player> {
-        &self.players[player]
+        match &self.players.get(player) {
+            Some(player_obj) => {
+                player_obj
+            }
+            None => {
+                &Option::None
+            }
+        }
     }
 }

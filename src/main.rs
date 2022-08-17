@@ -4,6 +4,8 @@ mod player;
 mod graphics;
 
 fn print_player_name(ctx: &context::Context, player: usize, x: f32, y: f32, fsize: f32, color: mq::Color) {
+    let (x, y) = graphics::normalize(x, y, true);
+    let (_, fsize) = graphics::normalize(0.0, fsize, false);
     match ctx.get_player(player) {
         Some(player_obj) => {
             mq::draw_text(&format!("Player {}: {}", player, player_obj.get_name())[..], x, y, fsize, color);
@@ -21,9 +23,9 @@ fn init(ctx: &mut context::Context) {
 
 fn frame(ctx: &mut context::Context) {
     mq::clear_background(mq::BLACK);
-    print_player_name(ctx, 0, 30f32, 48f32, 48f32, mq::WHITE);
-    print_player_name(ctx, 1, 30f32, 96f32, 48f32, mq::WHITE);
-    graphics::scale(0f32);
+    print_player_name(ctx, 0, 15.0, 24.0 * 1.0, 24.0, mq::WHITE);
+    print_player_name(ctx, 1, 15.0, 24.0 * 2.0, 24.0, mq::WHITE);
+    print_player_name(ctx, 2, 15.0, 24.0 * 3.0, 24.0, mq::WHITE);
 }
 
 fn config_window() -> mq::Conf {
